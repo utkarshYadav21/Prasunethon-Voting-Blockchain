@@ -6,7 +6,7 @@ async function main() {
 
   const Voting = await ethers.getContractFactory("Voting");
   const voting = await Voting.connect(deployer).deploy("Election 2024", 3600); // 1 hour duration
-  // await voting.deployed(); // Await the deployment transaction to be mined
+  await voting.waitForDeployment(); // Await the deployment transaction to be mined
 
   console.log("Voting contract deployed to:", voting.target);
 }
