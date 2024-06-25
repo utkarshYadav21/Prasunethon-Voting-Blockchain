@@ -1,0 +1,29 @@
+/* src/styles.css */
+.bg-split-45 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .bg-split-45::before,
+  .bg-split-45::after {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: 0;
+    left: 0;
+  }
+  .bg-split-45::before {
+    background: #3D52A0; /* Red color */
+    transform: rotate(45deg);
+    transform-origin: top left;
+  }
+  .bg-split-45::after {
+    background: #7091E6; /* Blue color */
+    transform: rotate(45deg);
+    transform-origin: bottom right;
+    top: -50%;
+    left: -50%;
+  }
+  
