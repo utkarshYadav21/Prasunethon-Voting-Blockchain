@@ -31,10 +31,13 @@ const Login = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      console.log(data.user);
+      console.log(data.token);
+      console.log(data.user.role);
       if (data.status) {
-        localStorage.setItem("voter", data.user);
+        localStorage.setItem("voter",JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.user.role);
         navigate("/profile");
       } else {
         console.error("Login failed:", data.message);

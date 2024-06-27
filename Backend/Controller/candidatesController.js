@@ -1,12 +1,15 @@
 const Candidate = require("../Models/candidateSchema");
 
 module.exports.postCandidate = async (req, res, next) => {
-  const { name, partyname, dob, description } = req.body;
+  const { name, partyname, dob, description } = req.body.formData;
+  const { image, candidateId } = req.body;
   let candidate = new Candidate({
     name,
     partyname,
     dob,
     description,
+    image,
+    candidateId,
   });
   try {
     candidate = await candidate.save();

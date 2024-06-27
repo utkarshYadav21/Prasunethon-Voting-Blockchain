@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Voting from "../abi/Voting.json";
 import { ethers } from "ethers";
 
-const App = () => {
+const Example = () => {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [voting, setVoting] = useState(null);
@@ -123,7 +123,7 @@ const App = () => {
 
   const getResult = async () => {
     try {
-      const result = await voting.getResult(2);
+      const result = await voting.getResult(1);
       console.log("Election result:", result);
     } catch (error) {
       console.error("Error getting result:", error);
@@ -158,4 +158,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Example;
