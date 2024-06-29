@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { useState } from "react";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import image from "../assets/home.png";
 
-const Candidate = ({ data, voting, voting }) => {
+const Candidate = ({ data, voting }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
@@ -14,7 +12,7 @@ const Candidate = ({ data, voting, voting }) => {
     let id = data.candidateId;
 
     try {
-      console.log(id);
+      console.log(id)
       const tx = await voting.vote(id);
       await tx.wait();
       console.log("Vote cast:", tx);
