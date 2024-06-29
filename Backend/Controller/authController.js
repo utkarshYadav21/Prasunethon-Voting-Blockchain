@@ -1,4 +1,4 @@
-const User = require("../Models/userSchema");
+const Voter = require("../Models/userSchema");
 const Candidate = require("../Models/candidateSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -27,7 +27,7 @@ module.exports.authenticate = async (req, res, next) => {
 module.exports.restrict = (roles) => async (req, res, next) => {
   const userId = req.userId;
   let user;
-  const voter = await User.findById(userId);
+  const voter = await Voter.findById(userId);
   const candidate = await Candidate.findById(userId);
   if (voter) {
     user = voter;
@@ -58,7 +58,7 @@ module.exports.register = async (req, res) => {
   try {
     let user = null;
     if (role === "voter" || "admin") {
-      user = await User.findOne({ email });
+      user = await Voter.findOne({ email });
     }
     // else if(role==='candidate'){
     //     user =await Candidate.findOne({email})
@@ -69,7 +69,7 @@ module.exports.register = async (req, res) => {
     // const salt = await bcrypt.genSalt(10)
     // const hashPassword = await bcrypt.hash(password, salt)
     if (role === "voter" || "admin") {
-      user = new User({
+      user = new Voter({
         name,
         email,
         password,
@@ -91,37 +91,31 @@ module.exports.register = async (req, res) => {
       .status(200)
       .json({ success: true, message: "User successfully created" });
   } catch (e) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: `${e} Internal server error, try again`,
-      });
+    res.status(500).json({
+      success: false,
+      message: `${e} Internal server error, try again`,
+    });
   }
 };
 module.exports.login = async (req, res) => {
-  const { email } = req.body;
+  const { email,password } = req.body;
   try {
     let user = null;
-    const voter = await User.findOne({ email });
-    //const doctor = await User.findOne({email})
-    const candidate = await Candidate.findOne({ email });
-    //doctor ko b same usme hi login krana hai?
+    const voter = await Voter.findOne({ email });
 
     if (voter) {
       user = voter;
     }
-    if (candidate) {
-      user = candidate;
-    }
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
+    
     const isPasswordMatch = await bcrypt.compare(
-      req.body.password,
+      password,
       user.password
     );
-    if (!isPasswordMatch) {
+    console.log(isPasswordMatch)
+    if (isPasswordMatch) {
       return res
         .status(400)
         .json({ status: false, message: "Invalid credentials" });

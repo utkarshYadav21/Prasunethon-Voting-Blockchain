@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  let user = localStorage.getItem("voter");
+  if (user) {
+    navigate("/profile");
+  }
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,7 +16,6 @@ const Signup = () => {
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Name: ${name}, Value: ${value}`);
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,

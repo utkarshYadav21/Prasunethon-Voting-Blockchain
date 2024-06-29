@@ -25,6 +25,6 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("Voter", UserSchema);
+const Voter = mongoose.model("Voter", UserSchema);
 
-module.exports.User;
+module.exports=Voter;

@@ -3,6 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/signup.jpg";
 
 const Login = () => {
+  let user = localStorage.getItem("voter");
+  if (user) {
+    navigate("/profile");
+  }
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,7 +16,6 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Name: ${name}, Value: ${value}`);
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -31,10 +34,10 @@ const Login = () => {
       });
 
       const data = await response.json();
-      console.log(data);
       if (data.status) {
-        localStorage.setItem("voter", data.user);
+        localStorage.setItem("voter",JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.user.role);
         navigate("/profile");
       } else {
         console.error("Login failed:", data.message);

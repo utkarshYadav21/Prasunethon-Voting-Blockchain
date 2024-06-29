@@ -9,6 +9,9 @@ import Elections from "./components/Elections";
 import Result from "./components/Result";
 import Voting from "./abi/Voting.json";
 import { ethers } from "ethers";
+import AddCandidate from "./components/AddCandidate";
+
+// const CONTRACT_ADDRESS=process.env.CONTRACT_ADDRESS;
 
 const App = () => {
   const [provider, setProvider] = useState(null);
@@ -31,7 +34,7 @@ const App = () => {
       setSigner(signer);
 
       const voting = new ethers.Contract(
-        "0xF5592E9D89DFB7C7359c48Ddeb6c2B6ab18469A1",
+        "0xd5bD3f7736fE36A27D66A7BFA49F9B00584e38ec",
         Voting,
         signer
       );
@@ -109,9 +112,16 @@ const App = () => {
         />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile account={account} />} />
-        <Route path="/elections" element={<Elections data={data} />} />
-        <Route path="/result" element={<Result data={data} />} />
-        <Route path="/authorize" element={<AuthorizeVoters />} />
+        <Route path="/elections" element={<Elections data={data} voting={votingContract}/>} />
+        <Route path="/result" element={<Result data={data} voting={votingContract} />} />
+        <Route
+          path="/authorize"
+          element={<AuthorizeVoters voting={votingContract} />}
+        />
+        <Route
+          path="/addCandidate"
+          element={<AddCandidate voting={votingContract} />}
+        />
       </Routes>
     </Router>
   );

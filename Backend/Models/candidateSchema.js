@@ -17,8 +17,10 @@ const candidateScehma = new mongoose.Schema({
     },
   },
   description: { type: String },
+  image: { type: String },
+  candidateId: { type: Number },
 });
 
 const Candidate = mongoose.model("Candidate", candidateScehma);
 
-module.exports.Candidate;
+module.exports = Candidate;
