@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   let user = localStorage.getItem("voter");
+  const navigate = useNavigate();
   if (user) {
     navigate("/profile");
   }
@@ -13,7 +14,6 @@ const Login = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;

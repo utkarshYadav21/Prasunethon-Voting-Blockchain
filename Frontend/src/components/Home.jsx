@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="bg-gradient-to-t from-custom-light to-custom-dark h-full p-4">
         <div className="flex flex-row justify-between min-h-[200px] p-6">
-            <div className=" font-bold text-2xl">Logo/Name</div>
+            <div className=" font-bold text-2xl">VoteX</div>
             <div>
                 <Link to="/login"><button className="text-white bg-[#3D52A0] py-2 px-4 min-w-[120px] rounded-md">Login</button></Link>
             </div>

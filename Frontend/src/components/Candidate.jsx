@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import image from "../assets/home.png";
+import { toast } from "react-toastify";
 
 const Candidate = ({ data, voting }) => {
   const [isOpen, setIsOpen] = useState(false);

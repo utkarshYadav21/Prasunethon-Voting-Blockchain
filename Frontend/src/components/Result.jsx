@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import VoteCount from "./VoteCount";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+
 
 const Result = ({ voting }) => {
   const [candidatesResult, setCandidatesResult] = useState([]);
@@ -19,6 +21,7 @@ const Result = ({ voting }) => {
         setCandidatesResult(results);
         console.log(candidatesResult)
       } catch (error) {
+        toast.error("Error getting results");
         console.error("Error getting result:", error);
       }
     };
@@ -29,7 +32,7 @@ const Result = ({ voting }) => {
   return (
     <div className="bg-gradient-to-t from-custom-light to-custom-dark text-white h-[100dvh]">
       <div className="flex flex-row justify-around min-h-[150px] p-6 text-blue-950">
-        <div className="font-bold text-2xl">Logo/Name</div>
+        <div className="font-bold text-2xl">VoteX</div>
         <div className="flex flex-row">
           <Link className="text-xl font-semibold mx-[36px]" to="/profile">
             Profile

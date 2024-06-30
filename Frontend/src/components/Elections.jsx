@@ -5,6 +5,7 @@ const Elections = ({ data, voting }) => {
   const role = localStorage.getItem("role");
   const [name, setName] = useState("");
   const [candidates, setCandidates] = useState([]);
+  import { toast } from "react-toastify";
 
   const fetchCandidates = async () => {
     try {
@@ -31,6 +32,7 @@ const Elections = ({ data, voting }) => {
       await tx.wait();
       console.log("Election ended successfully:", tx);
     } catch (error) {
+      toast.error("Error ending election");
       console.error("Error ending election:", error);
     }
   };
@@ -43,7 +45,7 @@ const Elections = ({ data, voting }) => {
   return (
     <div className="bg-gradient-to-t from-custom-light to-custom-dark text-white h-[100dvh]">
       <div className="flex flex-row justify-around min-h-[150px] p-6 text-blue-950">
-        <div className=" font-bold text-2xl">Logo/Name</div>
+        <div className=" font-bold text-2xl">VoteX</div>
         <div className="flex flex-row">
           <Link className="text-xl font-semibold mx-[36px]" to="/profile">
             Profile

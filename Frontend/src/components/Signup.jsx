@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const Signup = () => {
   let user = localStorage.getItem("voter");
   if (user) {
@@ -39,12 +39,15 @@ const Signup = () => {
       const data = await response.json();
 
       if (data.success) {
-        console.log(data)
+        console.log(data);
+        toast.success("User created successfully");
         navigate("/login");
       } else {
+        toast.error("Failed to create user");
         console.error("Signup failed:", data.message);
       }
     } catch (error) {
+      toast.error("Failed to create user");
       console.error("Signup failed:", error.message);
     }
   };

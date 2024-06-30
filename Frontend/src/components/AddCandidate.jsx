@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddCandidate = ({ voting }) => {
   
@@ -43,10 +44,12 @@ const AddCandidate = ({ voting }) => {
 
         tx = await voting.addCandidate(candidateData.name);
         await tx.wait();
+        toast.success("Candidate added");
         console.log("Candidate added:", tx);
 
         added = true;
       } catch (error) {
+        toast.error("Error adding candidate");
         console.error("Error adding candidate:", error);
       }
       if (added) {

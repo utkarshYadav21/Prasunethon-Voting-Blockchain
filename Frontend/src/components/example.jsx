@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Voting from "../abi/Voting.json";
 import { ethers } from "ethers";
+import { toast } from "react-toastify";
 
 const Example = () => {
   const [provider, setProvider] = useState(null);
@@ -27,6 +28,7 @@ const Example = () => {
       setVoting(voting);
       console.log("Voting Contract:", voting);
     } else {
+      toast.error("Metamask not connected");
       console.log("MetaMask not connected");
     }
   };
@@ -45,9 +47,11 @@ const Example = () => {
         setAccount(account);
         console.log("Connected account:", account);
       } else {
+        toast.error("No access");
         console.log("User denied account access");
       }
     } catch (error) {
+      toast.error("Error connecting to wallet");
       console.error("Error connecting to wallet:", error);
     }
   };
@@ -56,8 +60,10 @@ const Example = () => {
     try {
       const tx = await voting.endElection();
       await tx.wait();
+      toast.success("Election ended successfully");
       console.log("Election ended successfully:", tx);
     } catch (error) {
+      toast.error("Error ending elections");
       console.error("Error ending election:", error);
     }
   };
@@ -65,8 +71,10 @@ const Example = () => {
     try {
       const tx = await voting.authorizeVoter("0xb1cD729cbdFcC241a7A3e29B2f3836F949cA768f");
       await tx.wait();
+      toast.success("Voter authorized");
       console.log("Voter authorized:", tx);
     } catch (error) {
+      toast.error("Error authorizing voter");
       console.error("Error authorizing voter:", error);
     }
   };
@@ -87,6 +95,7 @@ const Example = () => {
       const candidates = await voting.candidates(2);
       console.log("Candidates:", candidates);
     } catch (error) {
+      toast.error("Error getting candidates");
       console.error("Error getting candidates:", error);
     }
   };
@@ -96,6 +105,7 @@ const Example = () => {
       const count = await voting.candidatesCount();
       console.log("Candidates count:", count);
     } catch (error) {
+
       console.error("Error getting candidates count:", error);
     }
   };
@@ -107,6 +117,7 @@ const Example = () => {
       const totalVotes = await voting.totalVotes();
       console.log("Total votes:", totalVotes);
     } catch (error) {
+      toast.error("Error getting total votes");
       console.error("Error getting total votes:", error);
     }
   };
@@ -115,8 +126,10 @@ const Example = () => {
     try {
       const tx = await voting.connect(signer).addCandidate("tushar");
       await tx.wait();
+      toast.success("Candidate added");
       console.log("Candidate added:", tx);
     } catch (error) {
+      toast.error("Error adding candidate");
       console.error("Error adding candidate:", error);
     }
   };
@@ -126,6 +139,7 @@ const Example = () => {
       const result = await voting.getResult(1);
       console.log("Election result:", result);
     } catch (error) {
+      toast.error("Error getting result");
       console.error("Error getting result:", error);
     }
   };
@@ -135,6 +149,7 @@ const Example = () => {
       const result = await voting.electionName();
       console.log("Election name:", result);
     } catch (error) {
+      toast.error("Error getting name");
       console.error("Error getting name:", error);
     }
   };

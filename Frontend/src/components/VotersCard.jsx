@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const VotersCard = ({ data ,voting}) => {
   const [age, setAge] = useState("");
@@ -24,8 +25,10 @@ const VotersCard = ({ data ,voting}) => {
     try {
       const tx = await voting.authorizeVoter(accid);
       await tx.wait();
+      toast.success("Voter Authorized");
       console.log("Voter authorized:", tx);
     } catch (error) {
+      toast.error("Error authorizing voter");
       console.error("Error authorizing voter:", error);
     }
   };
