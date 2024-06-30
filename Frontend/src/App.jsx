@@ -10,6 +10,8 @@ import Result from "./components/Result";
 import Voting from "./abi/Voting.json";
 import { ethers } from "ethers";
 import AddCandidate from "./components/AddCandidate";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // const CONTRACT_ADDRESS=process.env.CONTRACT_ADDRESS;
 
@@ -101,7 +103,8 @@ const App = () => {
     }
   };
 
-  return (
+  return (<>
+    <ToastContainer/>
     <Router>
       <Routes>
         <Route path="/" element={<Home data={data} />} />
@@ -124,6 +127,7 @@ const App = () => {
         />
       </Routes>
     </Router>
+    </>
   );
 };
 

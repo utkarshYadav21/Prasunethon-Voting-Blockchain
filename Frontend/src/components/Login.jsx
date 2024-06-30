@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/signup.jpg";
+import { toast } from "react-toastify";
 
 const Login = () => {
   let user = localStorage.getItem("voter");
@@ -38,11 +39,14 @@ const Login = () => {
         localStorage.setItem("voter",JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.user.role);
+        toast.success("Login Successfull");
         navigate("/profile");
       } else {
+        toast.error("Login Failed");
         console.error("Login failed:", data.message);
       }
     } catch (error) {
+      toast.error("Login Failed");
       console.error("Login failed:", error.message);
     }
   };
