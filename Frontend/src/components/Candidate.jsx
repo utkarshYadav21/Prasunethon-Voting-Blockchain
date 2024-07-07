@@ -16,9 +16,11 @@ const Candidate = ({ data, voting }) => {
       console.log(id)
       const tx = await voting.vote(id);
       await tx.wait();
+      toast.success("Vote counted successfully")
       console.log("Vote cast:", tx);
     } catch (error) {
-      console.error("Error voting:", error);
+      toast.error("Vote not counted")
+      console.error("Error voting:", error.message);
     }
   };
 

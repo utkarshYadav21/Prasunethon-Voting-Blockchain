@@ -1,7 +1,7 @@
 import image from '../assets/home.png'
 import { Link } from "react-router-dom";
 import {faqs } from "../assets/faq"
-import Faq from './Faq';
+import Faq from '../components/Faq';
 const Home = () => {
   return (
     <div className="bg-gradient-to-t from-custom-light to-custom-dark h-full p-4">

@@ -135,11 +135,11 @@ const AddCandidate = ({ voting }) => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="partyName"
+              id="partyname"
               type="text"
               placeholder="Party Name"
-              name="partyName"
-              value={candidateData.partyName}
+              name="partyname"
+              value={candidateData.partyname}
               onChange={handleInputChange}
               required
             />

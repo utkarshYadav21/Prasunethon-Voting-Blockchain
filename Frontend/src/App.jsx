@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AuthorizeVoters from "./components/AuthorizeVoters";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Profile from "./components/Profile";
-import Elections from "./components/Elections";
-import Result from "./components/Result";
+import AuthorizeVoters from "./pages/AuthorizeVoters";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
+import Elections from "./pages/Elections";
+import Result from "./pages/Result";
 import Voting from "./abi/Voting.json";
 import { ethers } from "ethers";
-import AddCandidate from "./components/AddCandidate";
-import {ToastContainer} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import AddCandidate from "./pages/AddCandidate";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // const CONTRACT_ADDRESS=process.env.CONTRACT_ADDRESS;
 
@@ -36,7 +36,7 @@ const App = () => {
       setSigner(signer);
 
       const voting = new ethers.Contract(
-        "0xd5bD3f7736fE36A27D66A7BFA49F9B00584e38ec",
+        "0xB3649A4E59D488AD962e9615E28236bc8ea235a3",
         Voting,
         signer
       );
@@ -103,30 +103,37 @@ const App = () => {
     }
   };
 
-  return (<>
-    <ToastContainer/>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home data={data} />} />
-        <Route path="/home" element={<Home data={data} />} />
-        <Route
-          path="/login"
-          element={<Login handleConnect={handleConnect} />}
-        />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile account={account} />} />
-        <Route path="/elections" element={<Elections data={data} voting={votingContract}/>} />
-        <Route path="/result" element={<Result data={data} voting={votingContract} />} />
-        <Route
-          path="/authorize"
-          element={<AuthorizeVoters voting={votingContract} />}
-        />
-        <Route
-          path="/addCandidate"
-          element={<AddCandidate voting={votingContract} />}
-        />
-      </Routes>
-    </Router>
+  return (
+    <>
+      <ToastContainer />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home data={data} />} />
+          <Route path="/home" element={<Home data={data} />} />
+          <Route
+            path="/login"
+            element={<Login handleConnect={handleConnect} />}
+          />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile account={account} />} />
+          <Route
+            path="/elections"
+            element={<Elections data={data} voting={votingContract} />}
+          />
+          <Route
+            path="/result"
+            element={<Result data={data} voting={votingContract} />}
+          />
+          <Route
+            path="/authorize"
+            element={<AuthorizeVoters voting={votingContract} />}
+          />
+          <Route
+            path="/addCandidate"
+            element={<AddCandidate voting={votingContract} />}
+          />
+        </Routes>
+      </Router>
     </>
   );
 };

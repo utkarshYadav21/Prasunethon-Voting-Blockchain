@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import VoteCount from "./VoteCount";
+import VoteCount from "../components/VoteCount";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 

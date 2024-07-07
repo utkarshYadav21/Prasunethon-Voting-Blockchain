@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import Candidate from "./Candidate";
+import Candidate from "../components/Candidate";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 const Elections = ({ data, voting }) => {
   const role = localStorage.getItem("role");
   const [name, setName] = useState("");
   const [candidates, setCandidates] = useState([]);
-  import { toast } from "react-toastify";
 
   const fetchCandidates = async () => {
     try {
@@ -31,6 +32,7 @@ const Elections = ({ data, voting }) => {
       const tx = await voting.endElection();
       await tx.wait();
       console.log("Election ended successfully:", tx);
+      toast.success("Election ended")
     } catch (error) {
       toast.error("Error ending election");
       console.error("Error ending election:", error);
